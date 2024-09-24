@@ -16,6 +16,11 @@ mu_mw = -29
 # error on mw
 alpha_mw = 28
 
+# TODO: these look incorrect?
+# these must be fiducial cross sections.
+# also why are these symmetric?
+# maybe Sam was normalizing + and - to the ATLAS predictions
+# but doesn't this neglect the acceptance effects in the BSM scenario?
 # xsec for mw as a function of bsm fraction
 sigma_sm_p = 1103
 sigma_bsm_p = 216.7
@@ -25,6 +30,7 @@ sigma_bsm_m = 216.7
 # parameters for mw as a function of bsm fraction
 a = 750
 b = 0.92
+
 
 # only defined for f>0
 def loglikelihood(f):
@@ -37,6 +43,7 @@ def loglikelihood_sigma_plus(f):
 
     return ll
 
+# I'm a bit confused by this to be honest...
 def loglikelihood_sigma_minus(f):
     ll = - ( (atlas_theory_m/sigma_sm_m)*(sigma_sm_m + f*sigma_bsm_m) - atlas_theory_m)**2/(2*alpha_sigma_m**2)
 

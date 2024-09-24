@@ -107,17 +107,20 @@ plt.savefig("likelihood_fits/minus_cdf_ptmiss.pdf")
 
 
 
+# does `bsm` mean CNHe = 1?
 # # # cross-sections
-# # CDF:
+# # CDF at 2 TeV:
 # w- sm:  866.4 pb
 # w+ sm:  202.0 pb
 # w- bsm: 866.4 pb
 # w+ bsm: 202.0 pb
-# # Atlas:
+# # Atlas 7 TeV:
 # w- sm:  1909 pb
 # w+ sm:  3464 pb
 # w- bsm: 615.6 pb
 # w+ bsm: 610.1 pb
+# I don't believe these can be correct. Are they flipped with the above?
+# these are probably not used anywhere.
 # # Atlas at 13.6TeV:
 # w- sm:  283.2 pb
 # w+ sm:  397.8 pb
