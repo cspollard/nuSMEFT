@@ -114,11 +114,12 @@ plt.savefig("likelihood_fits/minus_cdf_ptmiss.pdf")
 # w+ sm:  202.0 pb
 # w- bsm: 866.4 pb
 # w+ bsm: 202.0 pb
+# INCLUSIVE CROSS SECTIONS
 # # Atlas 7 TeV:
-# w- sm:  1909 pb
-# w+ sm:  3464 pb
-# w- bsm: 615.6 pb
-# w+ bsm: 610.1 pb
+# w- sm:  1909 pb - validated
+# w+ sm:  3464 pb - validated
+# w- bsm: 615.6 pb - validated
+# w+ bsm: 610.1 pb - validated
 # I don't believe these can be correct. Are they flipped with the above?
 # these are probably not used anywhere.
 # # Atlas at 13.6TeV:
