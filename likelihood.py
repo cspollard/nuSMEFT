@@ -47,6 +47,10 @@ hists_bsm = numpy2d(scan_bsm)
 # hists_sm_weighted = numpy2d(scan_sm_weighted)
 
 # # normalise nominal bin (bin 74) for unweighted histos:
+# TODO: this needs to be 4000000 , 8000 -> nevents
+# 8800: lumi
+# 866.4 , 202 : xsec
+# 74: nominal histogram
 hists_sm = ( hists_sm / integrate(hists_sm[74,:]) ) * ( getNumEntries2d(scan_sm_raw) / 40000000 ) * 8800 * 866.4 
 hists_bsm = ( hists_bsm / integrate(hists_bsm[74,:]) ) * ( getNumEntries2d(scan_bsm_raw) / 8000000 ) * 8800 * 202
 # hists_sm_weighted = hists_sm_weighted * integrate(hists_sm[74,:]) / integrate(hists_sm_weighted[74,:])
