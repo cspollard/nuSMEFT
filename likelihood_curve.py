@@ -5,12 +5,13 @@ from matplotlib.figure import Figure
 # TODO
 # all of these are ATLAS results so far?
 # mean xsec
-mu_sigma_p = 2747
+# https://arxiv.org/abs/1612.03016
+mu_sigma_p = 2947
 atlas_theory_p = 2850
 mu_sigma_m = 1964
 atlas_theory_m = 1918
 
-# error on xsec
+# error on xsecs
 alpha_sigma_p = numpy.sqrt(1**2 + 15**2 + 53**2 + 82**2)
 alpha_sigma_m = numpy.sqrt(1**2 + 11**2 + 35**2 + 57**2)
 
