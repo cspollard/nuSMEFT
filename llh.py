@@ -83,7 +83,7 @@ obsllhs = \
   [ ATLASobs
   , CMSobs
   , combine([ATLASobs, CMSobs])
-  , calcllh(curveATLASpTl, mus, cvCMSpTl, uncertCMSpTl)
+  , calcllh(curveCDFmT, mus, cvCDFmT, uncertCDFmT)
   ]
 
 labels = \
