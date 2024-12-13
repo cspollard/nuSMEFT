@@ -13,16 +13,16 @@ def poly(cs):
 
   return f
 
-curveATLASmT = poly([0, 1012])
-curveATLASpTl = poly([0, 784])
+curveATLASmT = poly([0, 934])
+curveATLASpTl = poly([0, 714])
 
 # https://arxiv.org/abs/1701.07240
-# assume ~all sensitivity is in pTl and there's no strong |\eta_\ell
+# assume ~all sensitivity is in pTl and there's no strong |\eta_\ell| dependence
 cvATLASpTl = -29.2
 uncertATLASpTl = 28
 
-curveCDFmT = poly([0, 76.9, -18.7, 3.7])
-curveCDFpTl = poly([0, 63.5, -15.5, 2.69])
+curveCDFmT = poly([0, 67.9, -16.6, 3.3])
+curveCDFpTl = poly([0, 58.1, -14.3, 2.51])
 
 cvCDFmT = 80433.5 - 80357
 uncertCDFmT = 9.4
