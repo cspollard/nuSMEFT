@@ -3,6 +3,24 @@ from matplotlib.figure import Figure
 
 MURANGE = (-0.5, 2)
 
+ATLASmTCs = [0, 934]
+ATLASpTlCs = [0, 714]
+
+CDFmTCs = [0, 67.9, -16.6, 3.3]
+CDFpTlCs = [0, 58.1, -14.3, 2.51]
+
+# https://arxiv.org/abs/1701.07240
+# assume ~all sensitivity is in pTl and there's no strong |\eta_\ell| dependence
+cvATLASpTl = -29.2
+uncertATLASpTl = 28
+
+cvCDFmT = 80433.5 - 80357
+uncertCDFmT = 9.4
+
+cvCMSpTl = 57
+uncertCMSpTl = 30
+
+
 def poly(cs):
   def f(xs):
     return \
@@ -13,27 +31,17 @@ def poly(cs):
 
   return f
 
-curveATLASmT = poly([0, 934])
-curveATLASpTl = poly([0, 714])
+curveATLASmT = poly(ATLASmTCs)
+curveATLASpTl = poly(ATLASpTlCs)
 
-# https://arxiv.org/abs/1701.07240
-# assume ~all sensitivity is in pTl and there's no strong |\eta_\ell| dependence
-cvATLASpTl = -29.2
-uncertATLASpTl = 28
-
-curveCDFmT = poly([0, 67.9, -16.6, 3.3])
-curveCDFpTl = poly([0, 58.1, -14.3, 2.51])
-
-cvCDFmT = 80433.5 - 80357
-uncertCDFmT = 9.4
-
-cvCMSpTl = 57
-uncertCMSpTl = 30
+curveCDFmT = poly(CDFmTCs)
+curveCDFpTl = poly(CDFpTlCs)
 
 
 def calcllh(calib, mus, cv, uncert):
   diffs = calib(mus) - cv
   return - diffs**2 / 2.0 / uncert**2
+
 
 def dmax(llhs):
   return llhs.max() - llhs
@@ -53,6 +61,7 @@ def plotllhs(plt, mus, llhs, labels, colors, lss):
   plt.set_ylim(0, 2)
 
   return plt
+
 
 def combine(llhs):
   return sum(llhs)
