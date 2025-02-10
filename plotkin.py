@@ -128,8 +128,8 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     print("%s total SM+ prediction: %.2e events" % (experiment , (smpredplus * widths).sum()))
     print("%s total SM- prediction: %.2e events" % (experiment , (smpredminus * widths).sum()))
-    print("%s total BSM+ prediction: %.2e events" % (experiment , (smpredplus * widths).sum()))
-    print("%s total BSM- prediction: %.2e events" % (experiment , (smpredminus * widths).sum()))
+    print("%s total BSM+ prediction: %.2e events" % (experiment , (bsmpredplus * widths).sum()))
+    print("%s total BSM- prediction: %.2e events" % (experiment , (bsmpredminus * widths).sum()))
     print("%s total SM prediction: %.2e events" % (experiment , (smpred * widths).sum()))
     print("%s total BSM prediction: %.2e events" % (experiment , (bsmpred * widths).sum()))
 
@@ -139,7 +139,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     plt = fig.add_subplot(3, 1, (1, 2))
 
     plt.plot(xs, sm, color="blue", label=r"$W \to \ell \nu$", lw=2)
-    plt.plot(xs, bsm, color="orange", label=r"$W \to \ell N$ ", lw=2, ls=":")
+    plt.plot(xs, bsm, color="orange", label=r"$W \to \ell \nu_R$ ", lw=2, ls=":")
     plt.set_xticks([])
     plt.set_ylabel("events / GeV")
 
@@ -165,8 +165,8 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     plt.plot(xs, smplus, color="blue", label=r"$W^+ \to \ell^+ \nu_\ell$", lw=2)
     plt.plot(xs, smminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_\ell$", lw=2)
-    plt.plot(xs, bsmplus, color="blue", label=r"$W^+ \to \ell^+ N$", lw=2, ls=":")
-    plt.plot(xs, bsmminus, color="orange", label=r"$W^- \to \ell^- \bar N$", lw=2, ls=":")
+    plt.plot(xs, bsmplus, color="blue", label=r"$W^+ \to \ell^+ \nu_R$", lw=2, ls=":")
+    plt.plot(xs, bsmminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_R$", lw=2, ls=":")
     plt.set_xticks([])
     plt.set_ylabel("events / GeV")
 
