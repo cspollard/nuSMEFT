@@ -15,10 +15,9 @@ atlas_theory_m = 1918
 alpha_sigma_p = numpy.sqrt(1**2 + 15**2 + 53**2 + 82**2)
 alpha_sigma_m = numpy.sqrt(1**2 + 11**2 + 35**2 + 57**2)
 
-# from where?
-# mean mw
+# mW+ - mW-
 mu_mw = -29
-# error on mw
+# error on mw+ - mW-
 alpha_mw = 28
 
 # maybe Sam was normalizing + and - to the ATLAS predictions
@@ -30,7 +29,7 @@ sigma_sm_m = 1103
 sigma_bsm_m = 216.8
 
 # mu = a * mW from a linear fit
-a = 750
+a = 714
 
 
 def loglikelihood_sigma_plus(mus):
@@ -69,10 +68,10 @@ llmass = loglikelihood_mass(mus)
 lls = llsigplus + llsigminus + llmass
 
 print("max log-likelihood: " + str(lls.max()))
-llsigplus = withmax(llsigplus)
-llsigminus = withmax(llsigminus)
-llmass = withmax(llmass)
-lls = withmax(lls)
+llsigplus = 2 * withmax(llsigplus)
+llsigminus = 2 * withmax(llsigminus)
+llmass = 2 * withmax(llmass)
+lls = 2 * withmax(lls)
 
 # fbest = mus[lls.argmin()]
 # print("max log-likelihood fraction: " + str(fbest))
@@ -88,8 +87,8 @@ plt.set_xlabel(r"$\mu$")
 plt.set_ylabel(r"$\Delta \log \mathcal{L}$")
 
 # add lines at \Delta log likelihood = 0.5, 1
-plt.plot([-100, 100], [0.5, 0.5], lw=1, color=("gray", 0.5))
 plt.plot([-100, 100], [1, 1], lw=1, color=("gray", 0.5))
+plt.plot([-100, 100], [3.84, 3.84], lw=1, color=("gray", 0.5))
 
 plt.plot(mus, lls, label="combined", color="black", lw=2)
 plt.plot(mus, llmass, label="$m_W$", color="orange", lw=2, ls=":")

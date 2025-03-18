@@ -110,7 +110,7 @@ procs = \
 
 beamlabels = \
   { "CMS"   : r"$pp$, $\sqrt{s} = 13$ TeV"
-  , "ATLAS" : r"$pp$, $\sqrt{s} = 8$ TeV"
+  , "ATLAS" : r"$pp$, $\sqrt{s} = 7$ TeV"
   , "CDF"   : r"$p\bar p$, $\sqrt{s} = 1.96$ TeV"
   }
 
@@ -153,12 +153,12 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     plt = fig.add_subplot(3, 1, (1, 2))
 
     plt.plot(xs, sm, color="blue", label=r"$W \to \ell \nu_L$", lw=2)
-    plt.plot(xs, bsm, color="orange", label=r"$W \to \ell \nu_R$ ", lw=2, ls=":")
+    plt.plot(xs, bsm, color="red", label=r"$W \to \ell \nu_R$ ", lw=2, ls=":")
     plt.set_xticks([])
-    plt.set_ylabel("events / GeV")
+    plt.set_ylabel("Events / GeV")
 
     ratioplt = fig.add_subplot(3, 1, 3)
-    ratioplt.plot(xs, bsm/sm, color="orange", lw=2, ls=":")
+    ratioplt.plot(xs, bsm/sm, color="red", lw=2, ls=":")
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("ratio")
 
@@ -181,15 +181,15 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     plt = fig.add_subplot(3, 1, (1, 2))
 
     plt.plot(xs, smplus, color="blue", label=r"$W^+ \to \ell^+ \nu_L$", lw=2)
-    plt.plot(xs, smminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_L$", lw=2)
+    plt.plot(xs, smminus, color="red", label=r"$W^- \to \ell^- \bar \nu_L$", lw=2)
     plt.plot(xs, bsmplus, color="blue", label=r"$W^+ \to \ell^+ \nu_R$", lw=2, ls=":")
-    plt.plot(xs, bsmminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_R$", lw=2, ls=":")
+    plt.plot(xs, bsmminus, color="red", label=r"$W^- \to \ell^- \bar \nu_R$", lw=2, ls=":")
     plt.set_xticks([])
-    plt.set_ylabel("events / GeV")
+    plt.set_ylabel("Events / GeV")
 
     ratioplt = fig.add_subplot(3, 1, 3)
     ratioplt.plot(xs, bsmplus/smplus, color="blue", lw=2, ls=":")
-    ratioplt.plot(xs, bsmminus/smminus, color="orange", lw=2, ls=":")
+    ratioplt.plot(xs, bsmminus/smminus, color="red", lw=2, ls=":")
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("ratio")
 
