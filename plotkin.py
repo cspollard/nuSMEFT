@@ -2,6 +2,8 @@ import yoda
 import numpy
 from matplotlib.figure import Figure
 
+# \Lambda = v
+# c_{HNe} = 1
 
 def numpy2d(h):
   values = \
@@ -47,6 +49,10 @@ def h2curve(h):
   ys = numpy.array([0] + list(double(h[1], h[1])) + [0])
 
   return xs, ys
+
+
+# x-axis ranges
+xaxrange = { "mT" : (60, 100) , "pTl" : (30 , 50) }
 
 # lumi in pb
 lumi = \
@@ -102,6 +108,12 @@ procs = \
     }
   }
 
+beamlabels = \
+  { "CMS"   : r"$pp$, $\sqrt{s} = 13$ TeV"
+  , "ATLAS" : r"$pp$, $\sqrt{s} = 8$ TeV"
+  , "CDF"   : r"$p\bar p$, $\sqrt{s} = 1.96$ TeV"
+  }
+
 axisdict = \
   { "pTl" : r"$p_T^\ell$ [GeV]"
   , "mT" : r"$m_T$ [GeV]"
@@ -116,6 +128,8 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     _ , bsmplus = procs[experiment]["BSM+"][kin]
     _ , bsmminus = procs[experiment]["BSM-"][kin]
 
+    beamlabel = beamlabels[experiment]
+
     widths = edges[1:] - edges[:-1]
 
     smpredplus = smplus * xsecs[experiment]["SM+"] * lumi[experiment]
@@ -126,19 +140,19 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     bsmpredminus = bsmminus * xsecs[experiment]["BSM-"] * lumi[experiment]
     bsmpred = bsmpredplus + bsmpredminus
 
-    print("%s total SM+ prediction: %.2e events" % (experiment , (smpredplus * widths).sum()))
-    print("%s total SM- prediction: %.2e events" % (experiment , (smpredminus * widths).sum()))
-    print("%s total BSM+ prediction: %.2e events" % (experiment , (bsmpredplus * widths).sum()))
-    print("%s total BSM- prediction: %.2e events" % (experiment , (bsmpredminus * widths).sum()))
-    print("%s total SM prediction: %.2e events" % (experiment , (smpred * widths).sum()))
-    print("%s total BSM prediction: %.2e events" % (experiment , (bsmpred * widths).sum()))
+    print("%s total SM+ prediction: %.2e events" % (beamlabel , (smpredplus * widths).sum()))
+    print("%s total SM- prediction: %.2e events" % (beamlabel , (smpredminus * widths).sum()))
+    print("%s total BSM+ prediction: %.2e events" % (beamlabel , (bsmpredplus * widths).sum()))
+    print("%s total BSM- prediction: %.2e events" % (beamlabel , (bsmpredminus * widths).sum()))
+    print("%s total SM prediction: %.2e events" % (beamlabel , (smpred * widths).sum()))
+    print("%s total BSM prediction: %.2e events" % (beamlabel , (bsmpred * widths).sum()))
 
     xs , sm = h2curve((edges, smpred))
     _ , bsm = h2curve((edges, bsmpred))
 
     plt = fig.add_subplot(3, 1, (1, 2))
 
-    plt.plot(xs, sm, color="blue", label=r"$W \to \ell \nu$", lw=2)
+    plt.plot(xs, sm, color="blue", label=r"$W \to \ell \nu_L$", lw=2)
     plt.plot(xs, bsm, color="orange", label=r"$W \to \ell \nu_R$ ", lw=2, ls=":")
     plt.set_xticks([])
     plt.set_ylabel("events / GeV")
@@ -148,7 +162,10 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("ratio")
 
-    plt.legend(title="%s electron channel" % experiment)
+    plt.legend(title=beamlabel)
+
+    plt.set_xlim(xaxrange[kin])
+    ratioplt.set_xlim(xaxrange[kin])
 
     fig.tight_layout()
     fig.savefig("%s-%s-total.png" % (experiment , kin))
@@ -163,8 +180,8 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     plt = fig.add_subplot(3, 1, (1, 2))
 
-    plt.plot(xs, smplus, color="blue", label=r"$W^+ \to \ell^+ \nu_\ell$", lw=2)
-    plt.plot(xs, smminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_\ell$", lw=2)
+    plt.plot(xs, smplus, color="blue", label=r"$W^+ \to \ell^+ \nu_L$", lw=2)
+    plt.plot(xs, smminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_L$", lw=2)
     plt.plot(xs, bsmplus, color="blue", label=r"$W^+ \to \ell^+ \nu_R$", lw=2, ls=":")
     plt.plot(xs, bsmminus, color="orange", label=r"$W^- \to \ell^- \bar \nu_R$", lw=2, ls=":")
     plt.set_xticks([])
@@ -176,7 +193,10 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("ratio")
 
-    plt.legend(title="%s electron channel" % experiment)
+    plt.legend(title=beamlabel)
+
+    plt.set_xlim(xaxrange[kin])
+    ratioplt.set_xlim(xaxrange[kin])
 
     fig.tight_layout()
     fig.savefig("%s-%s.png" % (experiment , kin))
