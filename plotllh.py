@@ -1,7 +1,7 @@
 import numpy
 from matplotlib.figure import Figure
 
-MURANGE = (-0.5, 2)
+CRANGE = (-0.5, 2)
 
 ATLASmTCs = [0, 934]
 ATLASpTlCs = [0, 714]
@@ -46,7 +46,8 @@ curveCDFmT = poly(CDFmTCs)
 curveCDFpTl = poly(CDFpTlCs)
 
 
-def calcllh(calib, mus, cv, uncert):
+def calcllh(calib, cs, cv, uncert):
+  mus = cs * cs
   diffs = calib(mus) - cv
   return - diffs**2 / 2.0 / uncert**2
 
@@ -64,8 +65,8 @@ def lims(lim, xs, ys):
   return numpy.min(allowed) , numpy.max(allowed)
 
 
-def plotllhs(plt, mus, llhs, labels, colors, lss):
-  plt.set_xlabel(r"$\mu$")
+def plotllhs(plt, cs, llhs, labels, colors, lss):
+  plt.set_xlabel(r"$c$")
   plt.set_ylabel(r"$-2\Delta \log \mathcal{L}$")
 
   # add lines at \Delta log likelihood = 0.5, 1
@@ -77,13 +78,13 @@ def plotllhs(plt, mus, llhs, labels, colors, lss):
     dllh = dmax(llh)
 
     print(label)
-    print("95%% CL interval: [%0.3f, %0.3f]" % lims(lim95, mus, dllh) )
-    print("68%% CL interval: [%0.3f, %0.3f]" % lims(lim68, mus, dllh) )
-    print("central value: %0.3f" % mus[numpy.argmin(dllh)] )
+    print("95%% CL interval: [%0.3f, %0.3f]" % lims(lim95, cs, dllh) )
+    print("68%% CL interval: [%0.3f, %0.3f]" % lims(lim68, cs, dllh) )
+    print("central value: %0.3f" % cs[numpy.argmin(dllh)] )
     print()
     print()
 
-    plt.plot(mus, dmax(llh), label=label, color=color, lw=2, ls=ls)
+    plt.plot(cs, dmax(llh), label=label, color=color, lw=2, ls=ls)
 
   plt.set_ylim(0, 4)
 
@@ -94,10 +95,10 @@ def plotllhs(plt, mus, llhs, labels, colors, lss):
 fig = Figure((6, 4))
 plt = fig.add_subplot()
 
-mus = numpy.arange(MURANGE[0], MURANGE[1], 0.00001)
+cs = numpy.arange(CRANGE[0], CRANGE[1], 0.00001)
 
-ATLASexp = calcllh(curveATLASpTl, mus, 0, uncertATLASpTl)
-CMSexp = calcllh(curveCMSpTl, mus, 0, uncertCMSpTl)
+ATLASexp = calcllh(curveATLASpTl, cs, 0, uncertATLASpTl)
+CMSexp = calcllh(curveCMSpTl, cs, 0, uncertCMSpTl)
 LHCexp = combine([ATLASexp, CMSexp])
 
 # expected
@@ -105,12 +106,12 @@ expllhs = \
   [ ATLASexp
   , CMSexp
   , LHCexp
-  , calcllh(curveCDFmT, mus, 0, uncertCDFmT)
+  , calcllh(curveCDFmT, cs, 0, uncertCDFmT)
   ]
 
 
-ATLASobs = calcllh(curveATLASpTl, mus, cvATLASpTl, uncertATLASpTl)
-CMSobs = calcllh(curveCMSpTl, mus, cvCMSpTl, uncertCMSpTl)
+ATLASobs = calcllh(curveATLASpTl, cs, cvATLASpTl, uncertATLASpTl)
+CMSobs = calcllh(curveCMSpTl, cs, cvCMSpTl, uncertCMSpTl)
 LHCobs = combine([ATLASobs, CMSobs])
 
 # observed
@@ -118,7 +119,7 @@ obsllhs = \
   [ ATLASobs
   , CMSobs
   , LHCobs
-  , calcllh(curveCDFmT, mus, cvCDFmT, uncertCDFmT)
+  , calcllh(curveCDFmT, cs, cvCDFmT, uncertCDFmT)
   ]
 
 labels = \
@@ -137,14 +138,14 @@ print()
 plt = \
   plotllhs \
   ( plt
-  , mus
+  , cs
   , obsllhs
   , labels
   , colors
   , linestyles
   )
 
-plt.set_xlim(MURANGE[0], MURANGE[1])
+plt.set_xlim(CRANGE[0], CRANGE[1])
 
 plt.legend(title="observed")
 
@@ -159,14 +160,14 @@ plt = fig.add_subplot()
 plt = \
   plotllhs \
   ( plt
-  , mus
+  , cs
   , expllhs
   , labels
   , colors
   , linestyles
   )
 
-plt.set_xlim(MURANGE[0], MURANGE[1])
+plt.set_xlim(CRANGE[0], CRANGE[1])
 
 plt.legend(title="expected")
 
