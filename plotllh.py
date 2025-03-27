@@ -1,7 +1,7 @@
 import numpy
 from matplotlib.figure import Figure
 
-CRANGE = (-0.5, 2)
+CRANGE = (0, 2)
 
 ATLASmTCs = [0, 934]
 ATLASpTlCs = [0, 714]
@@ -66,8 +66,8 @@ def lims(lim, xs, ys):
 
 
 def plotllhs(plt, cs, llhs, labels, colors, lss):
-  plt.set_xlabel(r"$c$")
-  plt.set_ylabel(r"$-2\Delta \log \mathcal{L}$")
+  plt.set_xlabel(r"$|c|$")
+  plt.set_ylabel(r"$-2\Delta \log L$")
 
   # add lines at \Delta log likelihood = 0.5, 1
   plt.plot([-100, 100], [lim68, lim68], lw=1, color=("gray", 0.5))
