@@ -53,7 +53,8 @@ def loglikelihood_mass(mus):
 
 
 # bsm fractions
-mus = numpy.arange(-0.1,0.1,0.00001)
+cs = numpy.arange(0, 1, 0.001)
+c2s = cs * cs
 
 # add and remove function calls inside numpy.append to change which curves are
 # being fitted for.
@@ -61,9 +62,9 @@ mus = numpy.arange(-0.1,0.1,0.00001)
 def withmax(ll):
     return ll.max() - ll
 
-llsigplus = loglikelihood_sigma_plus(mus) 
-llsigminus = loglikelihood_sigma_minus(mus) 
-llmass = loglikelihood_mass(mus)
+llsigplus = loglikelihood_sigma_plus(c2s)
+llsigminus = loglikelihood_sigma_minus(c2s)
+llmass = loglikelihood_mass(c2s)
 
 lls = llsigplus + llsigminus + llmass
 
@@ -73,30 +74,30 @@ llsigminus = 2 * withmax(llsigminus)
 llmass = 2 * withmax(llmass)
 lls = 2 * withmax(lls)
 
-# fbest = mus[lls.argmin()]
+# fbest = cs[lls.argmin()]
 # print("max log-likelihood fraction: " + str(fbest))
-# print("1-sigma down: " + str(mus[numpy.abs(lls[:lls.argmax()] + 1/2 ).argmin()]))
-# print("1-sigma up: " + str(mus[lls.argmax() + numpy.abs(lls[lls.argmax():] + 1/2 ).argmin()]))
-# print("2-sigma down: " + str( mus[ numpy.abs( lls[:lls.argmax()] + 1 ).argmin() ] ))
-# print("2-sigma up: " + str( mus[lls.argmax() + numpy.abs( lls[lls.argmax():] + 1 ).argmin() ] ))
+# print("1-sigma down: " + str(cs[numpy.abs(lls[:lls.argmax()] + 1/2 ).argmin()]))
+# print("1-sigma up: " + str(cs[lls.argmax() + numpy.abs(lls[lls.argmax():] + 1/2 ).argmin()]))
+# print("2-sigma down: " + str( cs[ numpy.abs( lls[:lls.argmax()] + 1 ).argmin() ] ))
+# print("2-sigma up: " + str( cs[lls.argmax() + numpy.abs( lls[lls.argmax():] + 1 ).argmin() ] ))
 
 fig = Figure((6, 4))
 plt = fig.add_subplot()
 
-plt.set_xlabel(r"$\mu$")
-plt.set_ylabel(r"$\Delta \log \mathcal{L}$")
+plt.set_xlabel(r"$|c|$")
+plt.set_ylabel(r"$-2 \Delta \log L$")
 
 # add lines at \Delta log likelihood = 0.5, 1
 plt.plot([-100, 100], [1, 1], lw=1, color=("gray", 0.5))
 plt.plot([-100, 100], [3.84, 3.84], lw=1, color=("gray", 0.5))
 
-plt.plot(mus, lls, label="combined", color="black", lw=2)
-plt.plot(mus, llmass, label="$m_W$", color="orange", lw=2, ls=":")
-plt.plot(mus, llsigplus, label=r"$\sigma_{fid}(W^+)$", color="blue", lw=2, ls="--")
-plt.plot(mus, llsigminus, label=r"$\sigma_{fid}(W^-)$", color="red", lw=2, ls="--")
+plt.plot(cs, lls, label="combined", color="black", lw=2)
+plt.plot(cs, llmass, label="$m_W$", color="orange", lw=2, ls=":")
+plt.plot(cs, llsigplus, label=r"$\sigma_{fid}(W^+)$", color="blue", lw=2, ls="--")
+plt.plot(cs, llsigminus, label=r"$\sigma_{fid}(W^-)$", color="red", lw=2, ls="--")
 
-plt.set_ylim(0, 2)
-plt.set_xlim(-0.1, 0.1)
+plt.set_ylim(0, 4)
+plt.set_xlim(cs[0], cs[-1])
 
 plt.legend(title="ATLAS")
 
