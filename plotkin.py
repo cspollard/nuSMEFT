@@ -160,7 +160,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt = fig.add_subplot(3, 1, 3)
     ratioplt.plot(xs, bsm/sm, color="red", lw=2, ls=":")
     ratioplt.set_xlabel(axisdict[kin])
-    ratioplt.set_ylabel("ratio")
+    ratioplt.set_ylabel("Ratio")
 
     plt.legend(title=beamlabel)
 
@@ -191,7 +191,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt.plot(xs, bsmplus/smplus, color="blue", lw=2, ls=":")
     ratioplt.plot(xs, bsmminus/smminus, color="red", lw=2, ls=":")
     ratioplt.set_xlabel(axisdict[kin])
-    ratioplt.set_ylabel("ratio")
+    ratioplt.set_ylabel("Ratio")
 
     plt.legend(title=beamlabel)
 

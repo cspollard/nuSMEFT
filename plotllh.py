@@ -66,7 +66,7 @@ def lims(lim, xs, ys):
 
 
 def plotllhs(plt, cs, llhs, labels, colors, lss):
-  plt.set_xlabel(r"$|c|$")
+  plt.set_xlabel(r"$|c_{HNe}|$")
   plt.set_ylabel(r"$-2\Delta \log L$")
 
   # add lines at \Delta log likelihood = 0.5, 1
@@ -147,7 +147,7 @@ plt = \
 
 plt.set_xlim(CRANGE[0], CRANGE[1])
 
-plt.legend(title="observed")
+plt.legend(title="$\\Lambda = 246$ GeV")
 
 fig.tight_layout()
 fig.savefig("llhs-observed.pdf")

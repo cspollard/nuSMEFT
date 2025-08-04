@@ -84,7 +84,7 @@ lls = 2 * withmax(lls)
 fig = Figure((6, 4))
 plt = fig.add_subplot()
 
-plt.set_xlabel(r"$|c|$")
+plt.set_xlabel(r"$|c_{HNe}|$")
 plt.set_ylabel(r"$-2 \Delta \log L$")
 
 # add lines at \Delta log likelihood = 0.5, 1
