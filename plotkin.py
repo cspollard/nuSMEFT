@@ -2,6 +2,10 @@ import yoda
 import numpy
 from matplotlib.figure import Figure
 
+FIGSIZE = (4, 4)
+YPADTOTAL = 1.4
+YPAD = 1.75
+
 # \Lambda = v
 # c_{HNe} = 1
 
@@ -120,7 +124,7 @@ axisdict = \
   }
 
 
-fig = Figure((5, 5))
+fig = Figure(FIGSIZE)
 for experiment in ["CMS" , "CDF" , "ATLAS"]:
   for kin in ["pTl", "mT"]:
     edges , smplus = procs[experiment]["SM+"][kin]
@@ -156,12 +160,16 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     plt.plot(xs, bsm, color="red", label=r"$W \to \ell \nu_R$ ", lw=2, ls=":")
     plt.set_xticks([])
     plt.set_ylabel("Events / GeV")
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0,3))
+
 
     ratioplt = fig.add_subplot(3, 1, 3)
     ratioplt.plot(xs, bsm/sm, color="red", lw=2, ls=":")
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("Ratio")
 
+    ymin , ymax = plt.get_ylim()
+    plt.set_ylim(ymin, ymax*YPAD)
     plt.legend(title=beamlabel)
 
     plt.set_xlim(xaxrange[kin])
@@ -186,6 +194,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     plt.plot(xs, bsmminus, color="red", label=r"$W^- \to \ell^- \bar \nu_R$", lw=2, ls=":")
     plt.set_xticks([])
     plt.set_ylabel("Events / GeV")
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0,3))
 
     ratioplt = fig.add_subplot(3, 1, 3)
     ratioplt.plot(xs, bsmplus/smplus, color="blue", lw=2, ls=":")
@@ -193,7 +202,9 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt.set_xlabel(axisdict[kin])
     ratioplt.set_ylabel("Ratio")
 
-    plt.legend(title=beamlabel)
+    ymin , ymax = plt.get_ylim()
+    plt.set_ylim(ymin, ymax*YPAD)
+    plt.legend(title=beamlabel, ncol=2)
 
     plt.set_xlim(xaxrange[kin])
     ratioplt.set_xlim(xaxrange[kin])

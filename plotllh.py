@@ -1,7 +1,9 @@
 import numpy
 from matplotlib.figure import Figure
 
+FIGSIZE = (5, 5*2/3.0)
 CRANGE = (0, 2)
+YRANGE = (0, 5)
 
 ATLASmTCs = [0, 934]
 ATLASpTlCs = [0, 714]
@@ -92,7 +94,7 @@ def plotllhs(plt, cs, llhs, labels, colors, lss):
 
 
 
-fig = Figure((6, 4))
+fig = Figure(FIGSIZE)
 plt = fig.add_subplot()
 
 cs = numpy.arange(CRANGE[0], CRANGE[1], 0.00001)
@@ -145,7 +147,8 @@ plt = \
   , linestyles
   )
 
-plt.set_xlim(CRANGE[0], CRANGE[1])
+plt.set_xlim(*CRANGE)
+plt.set_ylim(*YRANGE)
 
 plt.legend(title="$\\Lambda = 246$ GeV")
 
@@ -167,7 +170,9 @@ plt = \
   , linestyles
   )
 
-plt.set_xlim(CRANGE[0], CRANGE[1])
+plt.set_xlim(*CRANGE)
+plt.set_ylim(*YRANGE)
+
 
 plt.legend(title="expected")
 
