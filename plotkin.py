@@ -171,7 +171,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     ymin , ymax = plt.get_ylim()
     plt.set_ylim(ymin, ymax*YPADTOTAL)
-    plt.legend(title=beamlabel)
+    plt.legend(title=beamlabel, fontsize="small", title_fontsize="small")
 
     plt.set_xlim(xaxrange[kin])
     ratioplt.set_xlim(xaxrange[kin])
@@ -205,7 +205,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     ymin , ymax = plt.get_ylim()
     plt.set_ylim(ymin, ymax*YPAD)
-    plt.legend(title=beamlabel, ncol=2, loc="upper center")
+    plt.legend(title=beamlabel, ncol=2, loc="upper center", fontsize="small", title_fontsize="small")
 
     plt.set_xlim(xaxrange[kin])
     ratioplt.set_xlim(xaxrange[kin])
