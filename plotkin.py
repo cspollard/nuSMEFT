@@ -2,9 +2,10 @@ import yoda
 import numpy
 from matplotlib.figure import Figure
 
-FIGSIZE = (4, 4)
-YPADTOTAL = 1.4
-YPAD = 1.75
+FIGSIZE = (4, 4.5)
+YPADTOTAL = 1.2
+YPAD = 1.5
+RATIOFRAC = 0.25
 
 # \Lambda = v
 # c_{HNe} = 1
@@ -169,7 +170,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
     ratioplt.set_ylabel("Ratio")
 
     ymin , ymax = plt.get_ylim()
-    plt.set_ylim(ymin, ymax*YPAD)
+    plt.set_ylim(ymin, ymax*YPADTOTAL)
     plt.legend(title=beamlabel)
 
     plt.set_xlim(xaxrange[kin])
@@ -204,7 +205,7 @@ for experiment in ["CMS" , "CDF" , "ATLAS"]:
 
     ymin , ymax = plt.get_ylim()
     plt.set_ylim(ymin, ymax*YPAD)
-    plt.legend(title=beamlabel, ncol=2)
+    plt.legend(title=beamlabel, ncol=2, loc="upper center")
 
     plt.set_xlim(xaxrange[kin])
     ratioplt.set_xlim(xaxrange[kin])

@@ -2,7 +2,7 @@ import numpy
 from matplotlib.figure import Figure
 
 FIGSIZE = (5, 5*2/3.0)
-CRANGE = (0, 2)
+CRANGE = (0, 1.5)
 YRANGE = (0, 5)
 
 ATLASmTCs = [0, 934]
